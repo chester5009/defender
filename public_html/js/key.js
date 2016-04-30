@@ -11,13 +11,35 @@ var setKey = function(keyCode){
     keyDown = keyCode;
 };
 
+var clearKey = function(){
+    keyDown=0;
+};
+
 var isKeyDown=function(keyName){
     return keyDown == keys[keyName];
 };
 
+var gameEngine=function(){
+    
+    if(typeof engine=='function'){
+        engine();
+    }
+    else
+        console.log("Not found engine");
+    console.log(typeof(engine));
+    requestAnimationFrame(gameEngine);
+};
+
+
 window.onload=function(){
     
     window.onkeydown = function(e){
-        console.log(e.keyCode);
+        setKey(e.keyCode);
     }
+    
+    window.onkeyup = function(e){
+        clearKey();
+    }
+    
+    gameEngine();
 }
